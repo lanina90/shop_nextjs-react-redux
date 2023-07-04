@@ -1,13 +1,18 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
-import {setIsAuth} from "../redux/slices/userSlice";
+import {setIsAuth, setUser} from "../redux/slices/userSlice";
 import {useNavigate} from "react-router-dom";
 
 const NavBar = () => {
   const dispatch = useDispatch()
   const {isAuth} = useSelector(state => state.user)
   const navigate = useNavigate()
+
+  const logOut = () => {
+    dispatch(setUser({}))
+    dispatch(setIsAuth(false))
+  }
   return (
     <>
       <Navbar bg="dark" data-bs-theme="dark">
@@ -21,13 +26,13 @@ const NavBar = () => {
             >Admin Panel</Button>
             <Button
               variant={"outline-light"}
-              onClick={() => navigate(`/login`)}
+              onClick={() => logOut()}
               className={'m-1'}>Logout</Button>
           </Nav> :
             <Nav className="ml-auto">
               <Button
                 variant={"outline-light"}
-                onClick={() => dispatch(setIsAuth(true))}
+                onClick={() => navigate('/login')}
               >Authorization</Button>
             </Nav>}
 

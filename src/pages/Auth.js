@@ -1,24 +1,33 @@
 import React, {useState} from 'react';
 import {Button, Card, Container, Form, Row} from "react-bootstrap";
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {login, registration} from "../http/userAPI";
+import {useDispatch, useSelector} from "react-redux";
+import {setIsAuth, setUser} from "../redux/slices/userSlice";
 
 const Auth = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const location = useLocation()
   const isLogin = location.pathname === '/login'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const dfdfd = process.env.REACT_APP_API_URL
-  console.log(dfdfd);
   const click = async () => {
-    if (isLogin) {
-      const response = await login(email, password)
-    } else {
-      const response = await registration(email, password)
-      console.log(response);
-    }
+    try {
+      let user
+      if (isLogin) {
+        user = await login(email, password)
 
+      } else {
+        user = await registration(email, password)
+      }
+      dispatch(setUser(user))
+      dispatch(setIsAuth(true))
+      navigate('/')
+    } catch (e) {
+      alert(e.response.data.message)
+    }
   }
   return (
     <Container
