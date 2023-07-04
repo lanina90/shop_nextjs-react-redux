@@ -2,70 +2,14 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState = {
-  types: [
-    {id: 1, name: "Refrigerators"},
-    {id: 2, name: "Smartphones"},
-    {id: 3, name: "Laptops"},
-    {id: 4, name: "TV"},
-
-  ],
-  brands: [
-    {id: 1, name: "Samsung"},
-    {id: 2, name: "Apple"},
-    {id: 3, name: "Xiaomi"},
-    {id: 4, name: "LG"},
-    {id: 5, name: "Sony"},
-    {id: 6, name: "OnePlus"},
-    {id: 7, name: "Asus"}
-
-  ],
-  devices: [
-    {
-      id: 1,
-      name: "IPhone 12 pro",
-      price: 25000,
-      rating: 5,
-      img: ``
-    },
-    {
-      id: 2,
-      name: "IPhone 12 pro",
-      price: 25000,
-      rating: 5,
-      img: ``
-    },
-    {
-      id: 3,
-      name: "IPhone 12 pro",
-      price: 25000,
-      rating: 5,
-      img: ``
-    },
-    {
-      id: 4,
-      name: "IPhone 12 pro",
-      price: 25000,
-      rating: 5,
-      img: ``
-    },
-    {
-      id: 5,
-      name: "IPhone 12 pro",
-      price: 25000,
-      rating: 5,
-      img: ``
-    },
-    {
-      id: 6,
-      name: "IPhone 12 pro",
-      price: 25000,
-      rating: 5,
-      img: ``
-    },
-  ],
+  types: [],
+  brands: [],
+  devices: [],
   selectedType: {},
-  selectedBrand: {}
-
+  selectedBrand: {},
+  page: 1,
+  totalCount: 0,
+  limit: 3
 }
 
 const deviceSlice = createSlice({
@@ -73,19 +17,30 @@ const deviceSlice = createSlice({
   initialState,
   reducers: {
     setTypes: (state, action) => {
-      state.type = action.payload
+      state.types = action.payload
     },
     setSelectedType: (state, action) => {
       state.selectedType = action.payload
+      state.page = 1
     },
     setBrands: (state, action) => {
       state.brands = action.payload
     },
     setSelectedBrand: (state, action) => {
       state.selectedBrand = action.payload
+      state.page = 1
     },
     setDevices: (state, action) => {
       state.devices = action.payload
+    },
+    setPage: (state, action) => {
+      state.page = action.payload
+    },
+    setTotalCount: (state, action) => {
+      state.totalCount = action.payload
+    },
+    setLimit: (state, action) => {
+      state.limit = action.payload
     },
 
   }
@@ -96,5 +51,8 @@ export const {
   setSelectedType,
   setBrands,
   setSelectedBrand,
-  setDevices} = deviceSlice.actions;
+  setDevices,
+  setPage,
+  setTotalCount, setLimit
+} = deviceSlice.actions;
 export default deviceSlice.reducer;

@@ -4,7 +4,6 @@ import {Row} from "react-bootstrap";
 import DeviceItem from "./DeviceItem";
 
 const DeviceList = () => {
-  const dispatch = useDispatch()
   const {devices, selectedBrand} = useSelector(state => state.device)
   return (
     <Row className={'d-flex'}>

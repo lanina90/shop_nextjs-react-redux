@@ -5,7 +5,6 @@ import {setSelectedType} from "../redux/slices/deviceSlice";
 const TypeBar = () => {
   const dispatch = useDispatch()
   const {types,selectedType} = useSelector(state => state.device)
-
   return (
     <ul className="list-group">
       {types.map((type) =>
